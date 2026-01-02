@@ -14,7 +14,7 @@ export function ContentWrapper({ children, className, ...props }: ContentWrapper
   return (
     <div
       className={cn(
-        "transition-all duration-300 ease-linear min-h-screen w-full  p-4 pt-12",
+        "transition-all duration-300 ease-linear min-h-screen w-full bg-secondary/30 p-4 pt-12",
         // state === "expanded" ? "md:ml-[var(--sidebar-width)]" : "md:ml-[var(--sidebar-width-icon)]",
         className
       )}
