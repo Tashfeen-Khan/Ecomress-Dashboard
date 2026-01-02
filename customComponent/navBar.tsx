@@ -9,7 +9,7 @@ const NavBar = () => {
   return (
     <div
       className={cn(
-        "fixed top-0 h-11 w-full bg-pink-500 flex items-center px-2 z-20 transition-all duration-300 ease-linear",
+        "fixed top-0 h-11 w-full  border-b border-gray-200 flex items-center px-2 z-20 transition-all duration-300 ease-linear",
        state === "expanded"
   ? "md:ml-(--sidebar-width) w-[calc(100%-var(--sidebar-width))]"
   : "md:ml-(--sidebar-width-icon) w-[calc(100%-var(--sidebar-width-icon))]"
