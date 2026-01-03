@@ -8,14 +8,24 @@ interface ContentWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
 }
 
-export function ContentWrapper({ children, className, ...props }: ContentWrapperProps) {
+export function ContentWrapper({
+  children,
+  className,
+  ...props
+}: ContentWrapperProps) {
   const { state } = useSidebar()
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
 
   return (
     <div
       className={cn(
-        "transition-all duration-300 ease-linear min-h-screen w-full bg-secondary/30 p-4 pt-12",
-        // state === "expanded" ? "md:ml-[var(--sidebar-width)]" : "md:ml-[var(--sidebar-width-icon)]",
+        "relative flex-1 min-h-svh bg-secondary/30 p-4 pt-12 transition-all duration-300 ease-linear overflow-x-hidden",
         className
       )}
       {...props}

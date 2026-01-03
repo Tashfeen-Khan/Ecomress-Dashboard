@@ -5,6 +5,7 @@ import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/customComponent/app-sidebar";
+import NavBar from "@/customComponent/navBar";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -34,7 +35,7 @@ export default function RootLayout({
       >
         <SidebarProvider>
         <AppSidebar/>
-
+<NavBar/>
         {children}
         </SidebarProvider>
       </body>

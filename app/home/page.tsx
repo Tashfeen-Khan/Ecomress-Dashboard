@@ -6,7 +6,7 @@ import { ArrowUp, ArrowDown, Users, Package } from 'lucide-react'
 const DashboardPage = () => {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <ContentWrapper>
         <div className="h-[calc(100vh-80px)]  p-4">
           {/* Main Grid Container */}

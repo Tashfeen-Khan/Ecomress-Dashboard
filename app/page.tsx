@@ -6,7 +6,7 @@ import NavBar from "@/customComponent/navBar"
 export default function Home() {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <ContentWrapper>
         <h1 className="text-2xl font-bold mb-4">Dashboard Content</h1>
         <Button>Click Me</Button>

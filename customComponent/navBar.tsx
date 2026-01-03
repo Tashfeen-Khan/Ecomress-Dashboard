@@ -1,23 +1,24 @@
 "use client"
 
-import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar"
+import { SidebarTrigger } from "@/components/ui/sidebar"
 import { cn } from "@/lib/utils"
 
 const NavBar = () => {
-  const { state } = useSidebar()
-
   return (
     <div
       className={cn(
-        "fixed top-0 h-11 w-full bg-white border-b border-gray-200 flex items-center px-2 z-20 transition-all duration-300 ease-linear",
-       state === "expanded"
-  ? "md:ml-(--sidebar-width) w-[calc(100%-var(--sidebar-width))]"
-  : "md:ml-(--sidebar-width-icon) w-[calc(100%-var(--sidebar-width-icon))]"
+        "fixed top-0 z-20 h-11 w-full bg-white border-b border-gray-200 flex items-center px-2 transition-all duration-300 ease-linear",
 
+        // default (collapsed)
+        "md:ml-[var(--sidebar-width-icon)] md:w-[calc(100%-var(--sidebar-width-icon))]",
+
+        // when sidebar is expanded
+        "peer-data-[state=expanded]:md:ml-[var(--sidebar-width)]",
+        "peer-data-[state=expanded]:md:w-[calc(100%-var(--sidebar-width))]"
       )}
     >
       <SidebarTrigger />
-      <h1 className="ml-2 text-black font-bold">My Dashboard</h1>
+      <h1 className="ml-2 font-bold text-black">My Dashboard</h1>
     </div>
   )
 }

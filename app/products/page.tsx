@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Table } from '@/components/ui/table'
 import { ContentWrapper } from '@/customComponent/contentwraper'
 import NavBar from '@/customComponent/navBar'
 import { Download, Filter, Plus, Search } from 'lucide-react'
@@ -9,7 +8,7 @@ import DemoPage from '../product-table-data/page'
 const page = () => {
   return (
     <>
-    <NavBar/>
+    {/* <NavBar/> */}
        <ContentWrapper>
   <div className="space-y-6 ">
     <h1 className="text-2xl font-bold">Products</h1>
