@@ -20,6 +20,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar"
 
@@ -50,7 +51,6 @@ const items = [
     icon: Inbox,
     children: [
       { title: "Product List", url: "/products" },
-      { title: "Create Product", url: "/products/create" },
     ],
   }
 ]
@@ -72,10 +72,16 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           {/* LOGO */}
-          <SidebarGroupLabel className="text-3xl font-bold flex items-center gap-2">
-            <Image src="/user/profile.jpg" alt="Logo" width={30} height={30} />
+          <SidebarGroupLabel className="text-3xl font-bold flex  justify-between gap-2">
+            <div className="flex gap-2">
+            <Image src="/user/profile.jpg" alt="Logo" width={40} height={40} className="rounded-xl"/>
             <span className="group-data-[collapsible=icon]:hidden">TailAdmin</span>
+            </div>
+             <SidebarTrigger className="hidden max-[760px]:flex" />
+
           </SidebarGroupLabel>
+          {/* <div className="flex justify-end">
+          </div> */}
 
           <SidebarGroupContent>
             <SidebarMenu className="mt-4">
@@ -92,7 +98,7 @@ export function AppSidebar() {
                         asChild
                         className={`h-12 flex items-center gap-2 px-3 rounded-md cursor-pointer
                           ${isActive
-                            ? "bg-primary text-white"
+                            ? "bg-secondary text-primary"
                             : "bg-white text-black hover:bg-secondary hover:text-primary"}
                         `}
                       >
@@ -115,7 +121,7 @@ export function AppSidebar() {
                     <div
                       className={`h-12 flex items-center justify-between px-1 rounded-md cursor-pointer
                         ${isActive
-                          ? "bg-primary text-white"
+                          ? "bg-secondary text-primary"
                           : "bg-white text-black hover:bg-secondary hover:text-primary"}
                       `}
                     >
@@ -161,7 +167,7 @@ export function AppSidebar() {
                               href={child.url}
                               className={`block rounded-md px-3 py-2 text-sm
                                 ${childActive
-                                  ? "bg-primary text-white"
+                                  ? "bg-secondary text-primary"
                                   : "text-black hover:bg-secondary hover:text-primary"}
                               `}
                               onClick={handleLinkClick}

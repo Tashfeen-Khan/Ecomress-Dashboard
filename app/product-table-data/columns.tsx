@@ -96,19 +96,19 @@ export const columns: ColumnDef<Product>[] = [
     cell: ({ row }) => {
       const product = row.original
       return (
-        <DropdownMenu>
+        <DropdownMenu >
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Duplicate</DropdownMenuItem>
+          <DropdownMenuContent align="end" className="bg-white border border-gray-200">
+            <DropdownMenuLabel className="bg-secondary">Actions</DropdownMenuLabel>
+            <DropdownMenuItem className="hover:bg-secondary">Edit</DropdownMenuItem>
+            <DropdownMenuItem className="hover:bg-secondary">Duplicate</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-red-600">Delete</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-600 hover:bg-secondary">Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

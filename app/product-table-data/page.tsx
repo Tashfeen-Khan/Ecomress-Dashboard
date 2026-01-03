@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { ContentWrapper } from "@/customComponent/contentwraper"
 
 const data: Product[] = [
   {
@@ -196,10 +197,11 @@ export default function ProductsPage() {
   })
 
   return (
-    <div className="p-6 ">
+    // <ContentWrapper>
+    <div className=" ">
       
       {/* Filters Row */}
-    {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 border-b border-gray-200 pb-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 border-b border-gray-200 pb-4">
   
   <div className="relative w-full sm:col-span-2 lg:col-span-2">
     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -210,27 +212,27 @@ export default function ProductsPage() {
       className="pl-10 pr-4 w-full border-gray-300"
     />
   </div>
-  <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-    <SelectTrigger className="w-full">
+  <Select value={categoryFilter} onValueChange={setCategoryFilter}  >
+    <SelectTrigger className="w-full bg-white border border-gray-300">
       <SelectValue placeholder="Category" />
     </SelectTrigger>
-    <SelectContent>
+    <SelectContent className="bg-white border border-gray-300">
       <SelectItem value="all">All Categories</SelectItem>
       {categories.map((category) => (
-        <SelectItem key={category} value={category}>
+        <SelectItem key={category} value={category} className="hover:bg-secondary ">
           {category}
         </SelectItem>
       ))}
     </SelectContent>
   </Select>
   <Select value={brandFilter} onValueChange={setBrandFilter}>
-    <SelectTrigger className="w-full">
+    <SelectTrigger className="w-full bg-white border border-gray-300">
       <SelectValue placeholder="Brand" />
     </SelectTrigger>
-    <SelectContent>
+    <SelectContent className="bg-white border border-gray-200">
       <SelectItem value="all">All Brands</SelectItem>
       {brands.map((brand) => (
-        <SelectItem key={brand} value={brand}>
+        <SelectItem key={brand} value={brand} className="hover:bg-secondary">
           {brand}
         </SelectItem>
       ))}
@@ -238,26 +240,26 @@ export default function ProductsPage() {
   </Select>
 
   <Select value={priceFilter} onValueChange={setPriceFilter}>
-    <SelectTrigger className="w-full">
+    <SelectTrigger className="w-full bg-white border border-gray-300">
       <SelectValue placeholder="Price" />
     </SelectTrigger>
-    <SelectContent>
-      <SelectItem value="all">All Prices</SelectItem>
-      <SelectItem value="low">Under $500</SelectItem>
-      <SelectItem value="medium">$500 - $1500</SelectItem>
-      <SelectItem value="high">Above $1500</SelectItem>
+    <SelectContent className="bg-white border border-gray-200">
+      <SelectItem value="all" className="hover:bg-secondary">All Prices</SelectItem>
+      <SelectItem value="low" className="hover:bg-secondary">Under $500</SelectItem>
+      <SelectItem value="medium" className="hover:bg-secondary">$500 - $1500</SelectItem>
+      <SelectItem value="high" className="hover:bg-secondary">Above $1500</SelectItem>
     </SelectContent>
   </Select>
 
-</div> */}
+</div>
 
 
- <Card className="p-6 ">
+ {/* <Card className="p-6 bg-sky-700"> */}
         <DataTable columns={columns} data={filteredData} />
-</Card>
+{/* </Card> */}
 
 
-      <div className="flex justify-between items-center text-sm text-gray-500">
+      <div className="flex justify-between items-center text-sm text-gray-500 mt-4">
         <div>
           Showing {filteredData.length} of {data.length} products
         </div>
@@ -267,5 +269,6 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+    // </ContentWrapper>
   )
 }

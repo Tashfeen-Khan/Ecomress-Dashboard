@@ -16,6 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { ContentWrapper } from "@/customComponent/contentwraper"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -39,8 +40,9 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="">
-      <Table className="">
+    // <ContentWrapper>
+    <div className="h-60 overflow-y-auto ">
+      <Table className=" w-full">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -81,5 +83,6 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
+    //  </ContentWrapper>
   )
 }
