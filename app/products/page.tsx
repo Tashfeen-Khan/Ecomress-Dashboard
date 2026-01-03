@@ -8,6 +8,7 @@ import NavBar from "@/customComponent/navBar"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose, DialogFooter } from "@/components/ui/dialog"
 import { Plus } from "lucide-react"
 import { Input } from "@/components/ui/input"
+import ProductsPage from "../product-table-data/page"
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -39,6 +40,7 @@ const Page = () => {
               </div>
             </div>
           </Card>
+          <ProductsPage/>
         </div>
       </ContentWrapper>
 
