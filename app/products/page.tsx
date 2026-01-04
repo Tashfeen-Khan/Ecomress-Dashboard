@@ -42,9 +42,6 @@ const Page = () => {
           </Card>
           <ProductsPage/>
         </div>
-      </ContentWrapper>
-
-      {/* Modal at the end of the page */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen} >
         <DialogContent>
           <DialogHeader>
@@ -69,12 +66,11 @@ const Page = () => {
             </Button>
           </div>
         </DialogContent>
-        <DialogFooter>
-          <DialogClose asChild>
-              <Button onClick={() => setIsModalOpen(false)}>Close</Button>
-            </DialogClose>
-        </DialogFooter>
       </Dialog>
+      </ContentWrapper>
+
+      {/* Modal at the end of the page */}
+      
     </>
   )
 }
