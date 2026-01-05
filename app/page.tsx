@@ -56,7 +56,7 @@ export default function Home() {
                   {[150, 350, 200, 280, 170, 180, 270, 100, 200, 360, 260, 100].map((value, index) => (
                     <div
                       key={index}
-                      className="bg-gradient-to-t from-blue-500 to-blue-300 rounded-t-md"
+                      className="bg-linear-to-t from-blue-500 to-blue-300 rounded-t-md"
                       style={{ height: `${value / 4}px` }}
                     />
                   ))}
