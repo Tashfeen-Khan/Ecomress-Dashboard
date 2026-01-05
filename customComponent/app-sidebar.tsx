@@ -8,6 +8,7 @@ import {
   User,
   ChevronUp,
   ChevronDown,
+  LogIn,
 } from "lucide-react"
 
 import {
@@ -37,6 +38,16 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
+import axios from "axios"
 
 /* MENU */
 const items = [
@@ -60,14 +71,82 @@ export function AppSidebar() {
   const [openMenu, setOpenMenu] = useState<string | null>(
     pathname.startsWith("/products") ? "Products" : null
   )
+  const [email, setEmail] = useState("")
+const [password, setPassword] = useState("")
+const [loading, setLoading] = useState(false)
+ const [error, setError] = useState("")
+const router = useRouter()
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { setOpen } = useSidebar()
 
   const handleLinkClick = () => {
     // Open sidebar when any menu item is clicked (if it's collapsed)
     setOpen(true)
   }
+ const handleLogin = async () => {
+    try {
+      setLoading(true)
+      setError("")
 
+      console.log("🔄 Logging in...")
+
+      // ✅ CORRECT ENDPOINT: /api/auth/login
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password
+        },
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+
+      console.log("✅ Login response:", response.data)
+
+      if (response.data.token) {
+        // Save token to localStorage
+        localStorage.setItem("token", response.data.token)
+        localStorage.setItem("user", JSON.stringify(response.data.user))
+        
+        // Close modal
+        setIsModalOpen(false)
+        
+        // Clear form
+        setEmail("")
+        setPassword("")
+        
+        // Show success message
+        alert("Login successful! 🎉")
+        
+        // Refresh the page or redirect
+        window.location.reload()
+      }
+    } catch (err: any) {
+      console.error("❌ Login error:", err)
+      
+      if (err.response) {
+        // Server responded with error
+        setError(err.response.data.message || "Login failed")
+        alert(`Error: ${err.response.data.message}`)
+      } else if (err.request) {
+        // No response received
+        setError("Server not responding. Check if backend is running.")
+        alert("⚠️ Server not responding. Make sure backend is running on port 5000.")
+      } else {
+        // Other errors
+        setError("An error occurred. Please try again.")
+        alert("An unexpected error occurred.")
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
+    <>
     <Sidebar collapsible="icon" className="border-r border-gray-200">
       <SidebarContent>
         <SidebarGroup>
@@ -208,14 +287,19 @@ export function AppSidebar() {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent side="top" align="start" className="w-48">
-                <DropdownMenuItem>
+                {/* <DropdownMenuItem>
                   <User className="mr-2 h-4 w-4" /> Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings className="mr-2 h-4 w-4" /> Settings
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
+               <DropdownMenuItem
+  className="cursor-pointer"
+  onClick={() => setIsModalOpen(true)}
+>
+  <LogIn className="mr-2 h-4 w-4" />
+  Login
+</DropdownMenuItem>
+
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-600">
+                <DropdownMenuItem className="text-red-600 cursor-pointer">
                   <LogOut className="mr-2 h-4 w-4" /> Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -224,5 +308,38 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
+    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogContent>
+            <DialogHeader className="flex justify-center items-center">
+              <DialogTitle>Login</DialogTitle>
+            </DialogHeader>
+
+            <div className="mt-4 flex flex-col gap-4">
+            <Input
+  type="email"
+  placeholder="Enter Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
+
+<Input
+  type="password"
+  placeholder="Enter Password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+/>
+
+              <Button
+  className="self-end"
+  onClick={handleLogin}
+  disabled={loading}
+>
+  {loading ? "Logging in..." : "Submit"}
+</Button>
+
+            </div>
+          </DialogContent>
+        </Dialog>
+    </>
   )
 }
