@@ -4,11 +4,10 @@ import {
   Home,
   Inbox,
   LogOut,
-  Settings,
-  User,
   ChevronUp,
   ChevronDown,
   LogIn,
+  ImageUp,
 } from "lucide-react"
 
 import {
@@ -63,7 +62,12 @@ const items = [
     children: [
       { title: "Product List", url: "/products" },
     ],
-  }
+  },
+{
+    title: "Banners",
+    url: "/banners",
+    icon: ImageUp,
+  },
 ]
 
 export function AppSidebar() {
@@ -145,6 +149,11 @@ const router = useRouter()
       setLoading(false)
     }
   }
+  const handleLogout = () => {
+  localStorage.removeItem("token"); // ya cookie delete karo
+  window.location.href = "/"; // redirect to login page
+};
+
   return (
     <>
     <Sidebar collapsible="icon" className="border-r border-gray-200">
@@ -266,13 +275,13 @@ const router = useRouter()
       </SidebarContent>
 
       {/* FOOTER */}
-      <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
+      <SidebarFooter className="border-t border-t-gray-400  ">
+        <SidebarMenu >
+          <SidebarMenuItem >
+            <DropdownMenu >
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton size="lg" className="flex items-center gap-2">
-                  <Avatar className="h-8 w-8">
+                <SidebarMenuButton size="lg" className="flex items-center gap-2 cursor-pointer">
+                  <Avatar className="h-8 w-8 cursor-pointer">
                     <AvatarImage src="/user/profile.jpg" />
                     <AvatarFallback>TK</AvatarFallback>
                   </Avatar>
@@ -286,20 +295,20 @@ const router = useRouter()
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent side="top" align="start" className="w-48">
+              <DropdownMenuContent side="top" align="start" className="w-48 border border-gray-400">
                 {/* <DropdownMenuItem>
                   <User className="mr-2 h-4 w-4" /> Profile
                 </DropdownMenuItem> */}
                <DropdownMenuItem
-  className="cursor-pointer"
+  className="cursor-pointer hover:bg-secondary"
   onClick={() => setIsModalOpen(true)}
 >
-  <LogIn className="mr-2 h-4 w-4" />
+  <LogIn className="mr-2 h-4 w-4 " />
   Login
 </DropdownMenuItem>
 
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-600 cursor-pointer">
+                <DropdownMenuItem className="text-red-600 cursor-pointer hover:bg-secondary" onClick={()=>handleLogout()}>
                   <LogOut className="mr-2 h-4 w-4" /> Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
